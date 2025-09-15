@@ -10,7 +10,7 @@ import { loginRedirectGuard } from './guards/login-redirect.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent,canActivate: [loginRedirectGuard]  },
+  { path: 'login', component: LoginComponent },
 
   // rotas protegidas
   { path:'home', component: Home, canActivate: [authGuard]},

@@ -23,21 +23,21 @@ export class LoginComponent {
   form: FormGroup;
 
   constructor(private fb: FormBuilder, private router: Router) {
-    this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-    });
-
-    // Redireciona automaticamente se já estiver logado
-    if (localStorage.getItem('token')) {
-      this.router.navigate(['/home']);
-    }
-  }
+  this.form = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required]
+  });
+}
 
   submit() {
     if (this.form.valid) {
-      localStorage.setItem('token', 'fake-token');
-      this.router.navigate(['/home']);
-    }
+    localStorage.setItem('token', 'fake-token');
+    this.router.navigate(['/home']);
   }
+  }
+  logout() {
+  localStorage.removeItem('token');
+  this.router.navigate(['/login']);
+}
+
 }

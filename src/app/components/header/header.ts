@@ -19,8 +19,8 @@ constructor(private router: Router) {}
   }
 
   logout() {
-    localStorage.removeItem('token'); // 🔹 remove o token
-    this.router.navigate(['/login']); // 🔹 redireciona para login
-  }
+  localStorage.removeItem('token');
+  this.router.navigate(['/login']);
+}
 
 }
