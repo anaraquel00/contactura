@@ -1,14 +1,20 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Footer } from "./components/footer/footer";
-import { Header } from "./components/header/header";
+import { Component } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { Header } from './components/header/header';
+import { Footer } from './components/footer/footer';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Footer, Header],
+  standalone: true,
+  imports: [RouterOutlet, Header, Footer],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
-  protected readonly title = signal('contactura');
+export class AppComponent {
+  constructor(private router: Router) {}
+
+  // Mostra layout completo em qualquer rota que NÃO seja /login
+  showLayout(): boolean {
+  return !this.router.url.startsWith('/login');
+}
 }

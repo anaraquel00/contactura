@@ -1,1 +1,18 @@
-<p>header works!</p>
+<mat-toolbar color="primary">
+  <span>📇 Contactura</span>
+  <span class="spacer"></span>
+
+  @if (isLoggedIn()) {
+    <a mat-button routerLink="/home">Home</a>
+    <a mat-button routerLink="/contacts">Contatos</a>
+    <a mat-button routerLink="/despesas">Despesas</a>
+    <a mat-button routerLink="/receitas">Receitas</a>
+    <a mat-button routerLink="/relatorios">Relatórios</a>
+    <button mat-button (click)="logout()">Logout</button>
+  } @else {
+    <a mat-button routerLink="/login">Login</a>
+  }
+</mat-toolbar>
+
+
+
