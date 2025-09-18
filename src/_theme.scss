@@ -1,0 +1,10 @@
+// src/_theme.scss
+// Este arquivo é apenas nosso "catálogo de cores". Ele não gera nenhum CSS.
+
+// 1. Importamos as ferramentas do SAS
+@import '@angular/material/theming';
+
+// 2. Criamos variáveis para as mesmas paletas do tema 'indigo-pink'
+$contactura-primary: mat-palette($mat-indigo);
+$contactura-accent: mat-palette($mat-pink, A200, A100, A400);
+$contactura-warn: mat-palette($mat-red);
