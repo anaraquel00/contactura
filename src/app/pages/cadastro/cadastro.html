@@ -1,1 +1,12 @@
-<p>cadastro works!</p>
+<div class="cadastro-container">
+  <mat-tab-group
+    [selectedIndex]="getSelectedIndex()"
+    (selectedIndexChange)="navigateToTab($event)"
+  >
+    <mat-tab label="Clientes"></mat-tab>
+    <mat-tab label="Receitas"></mat-tab>
+    <mat-tab label="Despesas"></mat-tab>
+  </mat-tab-group>
+   <!-- Aqui os filhos vão ser carregados -->
+   <router-outlet></router-outlet>
+</div>

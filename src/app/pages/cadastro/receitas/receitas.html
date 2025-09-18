@@ -1,0 +1,31 @@
+
+<div class="cadastro-container">
+  <mat-card>
+    <mat-card-title>Cadastro de Receita</mat-card-title>
+    <form [formGroup]="form" (ngSubmit)="salvar()">
+      <mat-form-field class="full-width">
+        <mat-label>Tipo</mat-label>
+        <input matInput formControlName="tipo" placeholder="Ex: Salário, Investimento" />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Data</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="data" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Valor</mat-label>
+        <input matInput type="number" formControlName="valor" />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Descrição</mat-label>
+        <textarea matInput formControlName="descricao"></textarea>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Salvar</button>
+    </form>
+  </mat-card>
+</div>

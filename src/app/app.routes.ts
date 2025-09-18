@@ -9,11 +9,14 @@ import { Dashboard } from './pages/dashboard/dashboard';
 import { Relatorios } from './pages/relatorios/relatorio';
 import { ReceitaRelatorio } from './pages/relatorios/receitas/receita';
 import { DespesaRelatorio } from './pages/relatorios/despesas/despesa';
+import { ReceitasCadastro } from './pages/cadastro/receitas/receitas';
+import { DespesasCadastro } from './pages/cadastro/despesas/despesas';
+import { Clientes } from './pages/cadastro/clientes/clientes';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'cadastro', component: Cadastro },
+
 
 
   // rotas protegidas
@@ -21,6 +24,18 @@ export const routes: Routes = [
   { path:'home', component: Home, canActivate: [authGuard]},
   { path: 'relatorios', component: Relatorios, canActivate: [authGuard] },
   { path: 'contacts', component: Contacts, canActivate: [authGuard] },
+
+   {
+    path: 'cadastro',
+    component: Cadastro,
+    canActivate: [authGuard],
+    children: [
+      { path: '', redirectTo: 'clientes', pathMatch: 'full' }, // ✅ redireciona
+      { path: 'clientes', component: Clientes},
+      { path: 'receitas', component: ReceitasCadastro },
+      { path: 'despesas', component: DespesasCadastro }
+    ]
+  },
 
    {
     path: 'relatorios',
