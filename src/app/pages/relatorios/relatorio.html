@@ -1,8 +1,10 @@
-<h2>📊 Relatórios</h2>
-<nav>
-  <a routerLink="receitas">Relatório de Receitas</a> |
-  <a routerLink="despesas">Relatório de Despesas</a>
-</nav>
-<hr />
-<router-outlet></router-outlet>
+<mat-toolbar color="primary">
+  <a *ngFor="let aba of abas"
+     mat-button
+     [routerLink]="aba.rota"
+     routerLinkActive="active-link">
+    {{ aba.label }}
+  </a>
+</mat-toolbar>
 
+<router-outlet></router-outlet>

@@ -5,8 +5,9 @@
   @if (isLoggedIn()) {
     <a mat-button routerLink="/home">Home</a>
     <a mat-button routerLink="/cadastro">Cadastrar</a>
-    <a mat-button routerLink="/contacts">Contatos</a>
-    <a mat-button routerLink="/relatorios">Relatórios</a>
+    <a mat-button routerLink="/dashboard">Dashboard</a>
+    <a mat-button routerLink="/contact-form">Formulario</a>
+    <a mat-button routerLink="/relatorio">Relatórios</a>
     <button mat-button (click)="logout()">Logout</button>
   } @else {
     <a mat-button routerLink="/login">Login</a>

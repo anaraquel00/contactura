@@ -1,11 +1,11 @@
-<nav mat-tab-nav-bar [backgroundColor]="'primary'">
-  <a mat-tab-link
-     *ngFor="let aba of abas"
+<mat-toolbar color="primary">
+  <a *ngFor="let aba of abas"
+     mat-button
      [routerLink]="aba.rota"
-     routerLinkActive #rla="routerLinkActive"
-     [active]="rla.isActive">
+     routerLinkActive="active-link">
     {{ aba.label }}
   </a>
-</nav>
+</mat-toolbar>
 
 <router-outlet></router-outlet>
+

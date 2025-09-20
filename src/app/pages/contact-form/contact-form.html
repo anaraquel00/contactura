@@ -1,0 +1,28 @@
+<form [formGroup]="form">
+  <mat-card>
+  <mat-card-title>Formulario</mat-card-title>
+  <mat-card-content>
+  <mat-form-field>
+  <mat-label>Nome</mat-label>
+  <input matInput formControlName="nome">
+  <mat-error *ngIf="form.get('nome')?.hasError('required')">
+    O campo Nome é obrigatório.
+  </mat-error>
+ </mat-form-field>
+ <mat-form-field>
+ <mat-label>Email</mat-label>
+ <input matInput formControlName="email">
+  <mat-error *ngIf="form.get('email')?.hasError('required')">
+    O campo Email é obrigatório.
+  </mat-error>
+  <mat-error *ngIf="form.get('email')?.hasError('email')">
+    Por favor, digite um email válido.
+  </mat-error>
+  </mat-form-field>
+    </mat-card-content>
+  <mat-card-actions>
+  <button mat-raised-button (click)="onSubmit()">Salvar</button>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  </mat-card-actions>
+  </mat-card>
+ </form>
