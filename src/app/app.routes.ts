@@ -5,9 +5,9 @@ import { authGuard } from './guards/auth-guard'; // import do guard
 import { PageNotFound } from './pages/page-not-found/page-not-found';
 import { Cadastro } from './pages/cadastro/cadastro';
 import { DashboardComponent } from './pages/dashboard/dashboard';
-import { RelatoriosComponent } from './pages/relatorios/relatorio';
+import { RelatoriosComponent } from './pages/relatorios/relatorios';
 import { ReceitasComponent } from './pages/relatorios/receitas/receitas';
-import { DespesaRelatorio } from './pages/relatorios/despesas/despesas';
+import { DespesasComponent } from './pages/relatorios/despesas/despesas';
 import { ReceitasCadastro } from './pages/cadastro/receitas/receitas';
 import { DespesasCadastro } from './pages/cadastro/despesas/despesas';
 import { Clientes } from './pages/cadastro/clientes/clientes';
@@ -35,13 +35,13 @@ export const routes: Routes = [
   },
 
    {
-    path: 'relatorio',
+    path: 'relatorios',
     component: RelatoriosComponent,
     canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'receitas', pathMatch: 'full' },
       { path: 'receitas', component: ReceitasComponent },
-      { path: 'despesas', component: DespesaRelatorio }
+      { path: 'despesas', component: DespesasComponent }
     ]
   },
 
