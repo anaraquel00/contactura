@@ -19,7 +19,7 @@ export const routes: Routes = [
 
   // rotas protegidas
   { path:'home', component: Home, canActivate: [authGuard]},
-  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard], },
   { path :'contact-form', component: ContactForm,canActivate: [authGuard]},
 
    {
@@ -46,4 +46,4 @@ export const routes: Routes = [
   },
 
     { path: '**', component: PageNotFound }
-];
+  ];

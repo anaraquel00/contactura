@@ -29,7 +29,6 @@ const DADOS_DESPESAS: Despesa[] = [
     MatTableModule,
     MatIconModule,
     MatButtonModule,
-    MatTab,
     MatSlideToggleModule
 
 ],

@@ -1,44 +1,42 @@
+// Em src/app/pages/dashboard/dashboard.ts
+
 import { Component } from '@angular/core';
-// Importe os módulos que vamos precisar depois
+import { CommonModule } from '@angular/common'; // CommonModule já inclui o CurrencyPipe
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { CommonModule, CurrencyPipe } from '@angular/common';
 
-// Criamos uma interface para definir o formato de uma despesa
-export interface Despesa {
-  data: string;
-  valor: number;
-  tipo: string;
-  fixo: boolean;
-  descricao: string;
-}
-
-// Nossos dados de mentira
-const DADOS_DESPESAS: Despesa[] = [
-  { data: '19/09/2025', valor: 150.75, tipo: 'Alimentação', fixo: false, descricao: 'Supermercado' },
-  { data: '18/09/2025', valor: 85.00, tipo: 'Transporte', fixo: true, descricao: 'Gasolina' },
-  { data: '17/09/2025', valor: 1200.00, tipo: 'Moradia', fixo: true, descricao: 'Aluguel' },
-];
+// 1. As "plantas" dos dados (interfaces) e o serviço são importados.
+import { LancamentosService, Despesa, Receita } from '../../services/lancamentos';
+import { RouterModule } from '@angular/router'; // Adicionado para o routerLink
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
     CommonModule,
-    MatTableModule, // Módulo para a tabela
-    MatCardModule, // Módulo para o card
-    MatButtonModule, // Módulo para os botões
+    MatTableModule,
+    MatCardModule,
+    MatButtonModule,
     MatIconModule,
-    CurrencyPipe // Módulo para os ícones de editar/remover
+    RouterModule // Adicionado
   ],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.scss']
 })
 export class DashboardComponent {
-  // A lista de colunas que a tabela vai exibir. A ordem aqui importa!
-  colunasExibidas: string[] = ['data', 'valor', 'tipo', 'fixo', 'descricao', 'acoes'];
-  // Expomos nossos dados de mentira para o template
-  dataSource = DADOS_DESPESAS;
+  // Propriedades para a tabela de Despesas
+  colunasExibidasDespesas: string[] = ['data', 'valor', 'tipo', 'fixo', 'descricao', 'acoes'];
+  dataSourceDespesas: Despesa[] = [];
+
+  // Propriedades para a tabela de Receitas
+  colunasExibidasReceitas: string[] = ['data', 'valor', 'cliente', 'descricao', 'acoes'];
+  dataSourceReceitas: Receita[] = [];
+
+  constructor(private lancamentosService: LancamentosService) {
+    // Pedimos os "pratos" para a "cozinha"
+    this.dataSourceDespesas = this.lancamentosService.getDespesas();
+    this.dataSourceReceitas = this.lancamentosService.getReceitas();
+  }
 }

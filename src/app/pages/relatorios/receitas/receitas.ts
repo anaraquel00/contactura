@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatTab } from "@angular/material/tabs";
 import { CdkTableDataSourceInput } from '@angular/cdk/table';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 // Interface e Dados de exemplo que vivem aqui agora
 export interface Receita {
@@ -15,8 +15,8 @@ export interface Receita {
 }
 
 const DADOS_RECEITAS: Receita[] = [
-  { data: '20/09/2025', valor: 3500.00, cliente: 'Tech Solutions', descricao: 'Desenvolvimento de App' },
-  { data: '15/09/2025', valor: 1200.00, cliente: 'Marketing Criativo', descricao: 'Consultoria' },
+  { data: '19/09/2025', valor: 150.75, cliente: 'Fuctura', descricao: 'Curso Java' },
+  { data: '18/09/2025', valor: 85.00, cliente: 'Google', descricao: 'Google Play' },
 ];
 
 @Component({
@@ -27,14 +27,18 @@ const DADOS_RECEITAS: Receita[] = [
     MatTableModule,
     MatIconModule,
     MatButtonModule,
-    MatTab
+    MatSlideToggleModule
+
 ],
   templateUrl: './receitas.html',
   styleUrls: ['./receitas.scss']
 })
 export class ReceitasComponent {
-  colunasExibidas: string[] = ['data', 'valor', 'cliente', 'descricao', 'acoes'];
-  dataSource = DADOS_RECEITAS;
+  colunasExibidasReceita: string[] = ['data', 'valor', 'cliente', 'descricao', 'acoes'];
+  dataSource = DADOS_RECEITAS; // Usando os dados de exemplo
+  colunasExibidas: any;
   dataSourceReceitas!: CdkTableDataSourceInput<any>;
-colunasExibidasReceitas: any;
+
+
 }
+
