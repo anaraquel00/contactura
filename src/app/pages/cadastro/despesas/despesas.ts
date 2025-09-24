@@ -8,12 +8,15 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { LancamentosService } from '../../../services/lancamentos';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-despesas-cadastro',
   standalone: true,
   imports: [
+    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -23,17 +26,20 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDatepickerModule,
   ],
   templateUrl: './despesas.html',
   styleUrl: './despesas.scss'
 })
 export class DespesasCadastro {
   form: FormGroup;
-
   tipos = ['Saúde', 'Transporte', 'Educação', 'Lazer', 'Trabalho', 'Alimento', 'Domicílio', 'Empréstimo', 'Outros'];
 
-  constructor(private fb: FormBuilder) {
+
+  constructor(private fb: FormBuilder,
+    private snackBar: MatSnackBar, //barra de notificação
+    private lancamentosService: LancamentosService ) {
     this.form = this.fb.group({
       tipo: ['', Validators.required],
       fixa: [false],
@@ -45,7 +51,17 @@ export class DespesasCadastro {
 
   salvar() {
     if (this.form.valid) {
-      console.log('Despesa cadastrada:', this.form.value);
+      this.lancamentosService.addDespesa(this.form.value);
+
+      this.snackBar.open('✅ Despesa cadastrada com sucesso!', 'Fechar', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+        this.form.reset();
+
+    } else {
+      console.log('Formulário inválido');
     }
   }
 }

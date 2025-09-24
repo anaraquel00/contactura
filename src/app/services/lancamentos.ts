@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
-// As "plantas" dos nossos dados (interfaces) agora vivem aqui.
+// As interfaces continuam as mesmas
 export interface Receita {
-  data: string;
+  data: string | Date;
   valor: number;
   cliente: string;
   descricao: string;
 }
 
 export interface Despesa {
-  data: string;
+  data: string | Date;
   valor: number;
   tipo: string;
   fixo: boolean;
@@ -21,30 +22,70 @@ export interface Despesa {
 })
 export class LancamentosService {
 
-  // Nossas listas de dados agora vivem aqui, no "cérebro"
-  private despesas: Despesa[] = [
-    { data: '19/09/2025', valor: 150.75, tipo: 'Alimentação', fixo: false, descricao: 'Supermercado' },
-    { data: '18/09/2025', valor: 85.00, tipo: 'Transporte', fixo: true, descricao: 'Gasolina' },
-    { data: '17/09/2025', valor: 1200.00, tipo: 'Moradia', fixo: true, descricao: 'Aluguel' },
+  // 1. Nossos dados iniciais, caso o "bloco de notas" esteja vazio
+  private dadosIniciaisDespesas: Despesa[] = [
+    { data: '2025-09-19', valor: 150.75, tipo: 'Alimentação', fixo: false, descricao: 'Supermercado' },
+    { data: '2025-09-18', valor: 85.00, tipo: 'Transporte', fixo: true, descricao: 'Gasolina' },
   ];
 
-  private receitas: Receita[] = [
-    { data: '20/09/2025', valor: 3500.00, cliente: 'Tech Solutions', descricao: 'Desenvolvimento de App' },
-    { data: '15/09/2025', valor: 1200.00, cliente: 'Marketing Criativo', descricao: 'Consultoria' },
+  private dadosIniciaisReceitas: Receita[] = [
+    { data: '2025-09-20', valor: 3500.00, cliente: 'Tech Solutions', descricao: 'Desenvolvimento de App' },
+    { data: '2025-09-15', valor: 1200.00, cliente: 'Marketing Criativo', descricao: 'Consultoria' },
   ];
 
-  constructor() { }
+  // 2. Nossas "câmeras de segurança" (BehaviorSubject). Note que não inicializamos com dados ainda.
+  private despesasSubject = new BehaviorSubject<Despesa[]>([]);
+  private receitasSubject = new BehaviorSubject<Receita[]>([]);
 
-  // Função que os componentes chamarão para pegar a lista de despesas
-  getDespesas(): Despesa[] {
-    return this.despesas;
+  // Nossos "canais de TV" públicos
+  despesas$ = this.despesasSubject.asObservable();
+  receitas$ = this.receitasSubject.asObservable();
+
+  constructor() {
+    // 3. LÓGICA DE CARREGAMENTO: Roda UMA VEZ quando o serviço é criado.
+    // Tenta carregar as despesas salvas do "bloco de notas"
+    const despesasSalvas = localStorage.getItem('despesas');
+    if (despesasSalvas) {
+      // Se encontrou, traduz de volta para uma lista e transmite
+      this.despesasSubject.next(JSON.parse(despesasSalvas));
+    } else {
+      // Se não encontrou nada (primeira vez rodando), transmite os dados iniciais
+      this.despesasSubject.next(this.dadosIniciaisDespesas);
+    }
+
+    // Faz a mesma coisa para as receitas
+    const receitasSalvas = localStorage.getItem('receitas');
+    if (receitasSalvas) {
+      this.receitasSubject.next(JSON.parse(receitasSalvas));
+    } else {
+      this.receitasSubject.next(this.dadosIniciaisReceitas);
+    }
   }
 
-  // Função para pegar a lista de receitas
-  getReceitas(): Receita[] {
-    return this.receitas;
+  // 4. LÓGICA PARA SALVAR: Roda TODA VEZ que adicionamos um item.
+  addDespesa(novaDespesa: Despesa) {
+    const listaAtual = this.despesasSubject.getValue();
+    const novaLista = [...listaAtual, novaDespesa];
+    this.despesasSubject.next(novaLista); // Transmite a nova lista
+    this.salvarDespesasNoLocalStorage(); // Salva no "bloco de notas"
   }
 
-  // No futuro, teremos funções para adicionar, editar e remover
-  // addDespesa(novaDespesa: Despesa) { ... }
+  addReceita(novaReceita: Receita) {
+    const listaAtual = this.receitasSubject.getValue();
+    const novaLista = [...listaAtual, novaReceita];
+    this.receitasSubject.next(novaLista);
+    this.salvarReceitasNoLocalStorage();
+  }
+
+  // 5. Funções privadas para organizar o código
+  private salvarDespesasNoLocalStorage() {
+    // Pega a lista atual, traduz para texto, e salva no "bloco de notas"
+    localStorage.setItem('despesas', JSON.stringify(this.despesasSubject.getValue()));
+    console.log('Lista de despesas salva no LocalStorage!');
+  }
+
+  private salvarReceitasNoLocalStorage() {
+    localStorage.setItem('receitas', JSON.stringify(this.receitasSubject.getValue()));
+    console.log('Lista de receitas salva no LocalStorage!');
+  }
 }
