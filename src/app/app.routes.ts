@@ -30,7 +30,9 @@ export const routes: Routes = [
       { path: '', redirectTo: 'clientes', pathMatch: 'full' }, // ✅ redireciona
       { path: 'clientes', component: Clientes},
       { path: 'receitas', component: ReceitasCadastro },
-      { path: 'despesas', component: DespesasCadastro }
+      { path: 'receitas/edit/:id', component: ReceitasCadastro },
+      { path: 'despesas', component: DespesasCadastro },
+      { path: 'despesas/edit/:id', component: DespesasCadastro }
     ]
   },
 
@@ -41,7 +43,9 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'receitas', pathMatch: 'full' },
       { path: 'receitas', component: ReceitasComponent },
-      { path: 'despesas', component: DespesasComponent }
+      { path: 'despesas', component: DespesasComponent },
+
+
     ]
   },
 
