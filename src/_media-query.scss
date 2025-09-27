@@ -1,0 +1,6 @@
+    // _media-query.scss
+    @mixin media-query($query) {
+      @media #{$query} {
+        @content;
+      }
+    }

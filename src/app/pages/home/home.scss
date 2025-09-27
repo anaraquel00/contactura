@@ -1,4 +1,3 @@
-@use '../../../responsive' as responsive;
 
 .welcome-container {
   display: flex;
@@ -29,23 +28,3 @@
 }
 
 
-/* =================================== */
-/* REGRAS PARA TELAS PEQUENAS (CELULAR) */
-/* =================================== */
-// 2. Usamos a variável $breakpoint-tablet para criar a regra para telas menores
-@media (max-width: #{responsive.$breakpoint-mobile}) {
-  .welcome-container {
-    flex-direction: column;
-    text-align: center;
-    padding: 20px;
-  }
-
-  .welcome-text h1 {
-    font-size: 2em;
-  }
-
-  // Regra extra para celulares, usando a outra variável
-  .welcome-image {
-    display: none; // Oculta a imagem em telas muito pequenas
-  }
-}

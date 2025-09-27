@@ -1,4 +1,6 @@
 
+@use '../../../_responsive.scss' as responsive;
+
 .spacer {
   flex: 1 1 auto;
 }
@@ -11,3 +13,36 @@ a {
     text-decoration: underline;
   }
 }
+
+// Esconde os links de navegação em telas pequenas e médias
+@include responsive.media-xs {
+  a[mat-button] {
+    display: none;
+  }
+}
+
+@include responsive.media-sm {
+  a[mat-button] {
+    display: none;
+  }
+}
+
+// Esconde o botão de menu em telas grandes
+@include responsive.media-md {
+  .menu-button {
+    display: none;
+  }
+}
+
+@include responsive.media-lg {
+  .menu-button {
+    display: none;
+  }
+}
+
+@include responsive.media-xl {
+  .menu-button {
+    display: none;
+  }
+}
+

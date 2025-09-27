@@ -1,9 +1,25 @@
 @if (showLayout()) {
-  <app-header></app-header>
-  <main class="main-content">
-    <router-outlet></router-outlet>
-  </main>
-  <app-footer></app-footer>
+  <mat-sidenav-container class="sidenav-container">
+
+    <mat-sidenav #sidenav mode="over">
+      <mat-nav-list>
+        <a mat-list-item routerLink="/home" (click)="sidenav.close()">Home</a>
+        <a mat-list-item routerLink="/cadastro" (click)="sidenav.close()">Cadastrar</a>
+        <a mat-list-item routerLink="/dashboard" (click)="sidenav.close()">Dashboard</a>
+        <a mat-list-item routerLink="/contact-form" (click)="sidenav.close()">Formulário</a>
+        <a mat-list-item routerLink="/relatorios" (click)="sidenav.close()">Relatórios</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <app-header (menuToggle)="sidenav.toggle()"></app-header>
+      <main class="main-content">
+        <router-outlet></router-outlet>
+      </main>
+      <app-footer></app-footer>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
 } @else {
   <router-outlet></router-outlet>
 }

@@ -1,13 +1,7 @@
-@use './responsive' as responsive;
+
 
 /* Você pode adicionar seus estilos globais aqui */
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-/* Exemplo de regra responsiva GLOBAL */
-@media (max-width: #{responsive.$breakpoint-mobile}) {
-  // Em telas de celular, diminui um pouco a fonte base do site inteiro
-  body {
-    font-size: 14px;
-  }
-}
+
