@@ -1,3 +1,4 @@
+@use '../../../responsive' as r;
 
 .welcome-container {
   display: flex;
@@ -6,6 +7,12 @@
   padding: 50px;
   gap: 40px;
   min-height: 70vh;
+
+  @include r.mobile {
+    flex-direction: column;
+    padding: 25px;
+    text-align: center;
+  }
 }
 
 .welcome-text {
@@ -14,6 +21,10 @@
   h1 {
     font-size: 2.5em;
     font-weight: bold;
+
+    @include r.mobile {
+      font-size: 2em;
+    }
   }
 
   p {
@@ -25,6 +36,10 @@
 .welcome-image img {
   max-width: 400px;
   border-radius: 8px;
+
+  @include r.mobile {
+    max-width: 90vw; // Garante que a imagem não ultrapasse a largura da tela
+  }
 }
 
 
