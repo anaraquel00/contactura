@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <a *ngFor="let aba of abas"
      mat-button
-     [routerLink]="aba.rota"
+     [routerLink]="['./' + aba.rota]"
      routerLinkActive="active-link">
     {{ aba.label }}
   </a>
