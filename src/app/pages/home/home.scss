@@ -7,6 +7,7 @@
   padding: 50px;
   gap: 40px;
   min-height: 70vh;
+  background-color: #ccccd4;
 
   @include r.mobile {
     flex-direction: column;
@@ -33,12 +34,12 @@
   }
 }
 
-.welcome-image img {
-  max-width: 300px;
+.welcome-video video {
+  max-width: 600px;
   border-radius: 8px;
 
   @include r.mobile {
-    max-width: 100%; // Garante que a imagem não ultrapasse a largura da tela
+    max-width: 100%;  // Garante que o video não ultrapasse a largura da tela
   }
   margin-top: 20px;
 }
