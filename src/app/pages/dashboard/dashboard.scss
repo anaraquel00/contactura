@@ -24,3 +24,11 @@ mat-card-content {
 table {
   width: 100%;
 }
+
+.table-container {
+  // Em telas pequenas, permite que a tabela role horizontalmente
+  @include r.mobile {
+    overflow-x: auto;
+  }
+  margin-bottom: 1rem;
+}

@@ -10,7 +10,7 @@
 
   @include r.mobile {
     flex-direction: column;
-    padding: 25px;
+    padding: 20px;
     text-align: center;
   }
 }
@@ -38,8 +38,9 @@
   border-radius: 8px;
 
   @include r.mobile {
-    max-width: 90vw; // Garante que a imagem não ultrapasse a largura da tela
+    max-width: 100%; // Garante que a imagem não ultrapasse a largura da tela
   }
+  margin-top: 20px;
 }
 
 

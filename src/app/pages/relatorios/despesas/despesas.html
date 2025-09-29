@@ -3,7 +3,7 @@
     <h3>Últimas Despesas</h3>
     <mat-slide-toggle>Mostrar apenas despesas fixas</mat-slide-toggle>
   </div>
-
+  <div class="table-container">
   <table mat-table [dataSource]="dataSource">
 
     <ng-container matColumnDef="id">
@@ -50,6 +50,7 @@
     <tr mat-header-row *matHeaderRowDef="colunasExibidas"></tr>
     <tr mat-row *matRowDef="let row; columns: colunasExibidas;"></tr>
   </table>
+  </div>
   <mat-paginator [pageSizeOptions]="[5, 10, 25]"
                  showFirstLastButtons
                  aria-label="Selecione a página de despesas">
