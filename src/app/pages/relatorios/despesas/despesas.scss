@@ -1,0 +1,24 @@
+@use '../../../../responsive' as r;
+
+.tab-content {
+  padding: 20px;
+
+  // Em telas pequenas, permite que a tabela role horizontalmente
+  @include r.mobile {
+    overflow-x: auto;
+  }
+}
+
+.header-com-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+// Garante que a tabela ocupe o espaço necessário para não quebrar
+table {
+  width: 100%;
+}

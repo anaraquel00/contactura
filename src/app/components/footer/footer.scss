@@ -1,13 +1,20 @@
+@use '../../../responsive' as r;
+
 .footer {
   // Posiciona o rodapé fixo na parte de baixo da tela
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+  font-size:medium;
 
   // Apenas para centralizar o texto
   display: flex;
   justify-content: center;
   align-items: center;
   height: 50px; // Altura do rodapé
+
+  @include r.mobile {
+    overflow-x: auto;
+  }
 }
